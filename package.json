@@ -13,6 +13,8 @@
   "homepage": "https://react-fire-tv-web-app-example.netlify.com/",
   "dependencies": {
     "@noriginmedia/react-spatial-navigation": "^2.12.5",
+    "milligram": "^1.4.1",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-keyboard-input-hook": "^1.0.0",

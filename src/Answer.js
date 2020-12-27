@@ -1,12 +1,16 @@
 import React from 'react';
 import { withFocusable } from '@noriginmedia/react-spatial-navigation';
 
-const Answer = ({ answer }) => {
-  return <div focusable="true">{answer}</div>;
-};
-const FocusableComponent = withFocusable({
-  trackChildren: false,
-  forgetLastFocusedChild: true
-})(Answer);
+class Answer extends React.PureComponent {
+  render() {
+    return (
+      <button className={this.props.focused ? 'button' : 'button-outline'}>
+        {this.props.val}
+      </button>
+    );
+  }
+}
 
-export default FocusableComponent;
+const AnswerFocusable = withFocusable()(Answer);
+
+export default AnswerFocusable;

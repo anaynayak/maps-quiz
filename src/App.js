@@ -1,16 +1,13 @@
 import React from 'react';
 import './App.css';
 import MapChart from './MapChart';
-import Question from './Question';
-import {
-  initNavigation,
-  setKeyMap
-} from '@noriginmedia/react-spatial-navigation';
+import { initNavigation } from '@noriginmedia/react-spatial-navigation';
+import QuestionFocusable from './Question';
 
 function App() {
   initNavigation({
-    debug: true,
-    visualDebug: true
+    // debug: true,
+    // visualDebug: true
   });
   const question = {
     name: 'Identify the country',
@@ -19,8 +16,8 @@ function App() {
   };
   return (
     <div className="App">
-      <Question question={question} />
-      {/* <MapChart selected="India" /> */}
+      <QuestionFocusable focusable={false} question={question} />
+      <MapChart selected="India" />
     </div>
   );
 }
