@@ -5,6 +5,11 @@ class Questions {
         name: 'Identify the country',
         options: ['India', 'China', 'USA', 'Russia'],
         answer: 'India'
+      },
+      {
+        name: 'Identify the country',
+        options: ['India', 'China', 'USA', 'Russia'],
+        answer: 'China'
       }
     ];
   }

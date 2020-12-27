@@ -29,7 +29,7 @@ class Question extends React.PureComponent {
   }
 
   render() {
-    const { name, options, answer } = this.props.question;
+    const { name, options } = this.props.question;
     const validate = this.validate.bind(this);
     return (
       <div className="questions">
