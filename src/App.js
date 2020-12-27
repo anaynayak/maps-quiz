@@ -10,21 +10,25 @@ import {
 } from 'react-notifications';
 import Questions from './Questions';
 import flatMap from 'lodash/flatMap';
+import Sources from './Sources';
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.geoUrl = Questions.Countries;
-    this.state = { questions: [] };
+    this.state = { questions: [], source: Sources.WORLD };
   }
 
   componentDidMount() {
-    return fetch(this.geoUrl)
+    return fetch(this.state.source.url)
       .then(r => r.json())
       .then(d =>
-        flatMap(d.objects, a => a.geometries.map(g => g.properties.NAME))
+        flatMap(d.objects, a =>
+          a.geometries.map(g => g.properties[this.state.source.prop])
+        )
       )
       .then(names => {
-        this.setState({ questions: new Questions(names).allq() });
+        this.setState({
+          questions: new Questions(names, this.state.source.question).allq()
+        });
       });
   }
   onComplete(val, actual) {
@@ -42,7 +46,6 @@ class App extends React.PureComponent {
 
   render() {
     initNavigation();
-
     const question = this.state.questions[0];
     const onComplete = this.onComplete.bind(this);
     return (
@@ -55,7 +58,10 @@ class App extends React.PureComponent {
           />
         )}
         {!question && <h3>Congratulations! You have completed the quiz</h3>}
-        <MapChart selected={question && question.answer} geoUrl={this.geoUrl} />
+        <MapChart
+          selected={question && question.answer}
+          source={this.state.source}
+        />
         <NotificationContainer />
       </div>
     );

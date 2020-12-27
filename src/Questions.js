@@ -3,15 +3,14 @@ import concat from 'lodash/concat';
 import shuffle from 'lodash/shuffle';
 
 class Questions {
-  static Countries =
-    'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
-  constructor(all) {
+  constructor(all, question) {
     this.all = all;
+    this.question = question;
   }
 
   allq() {
     return this.all.map(q => ({
-      name: 'Identify the country',
+      name: this.question,
       options: shuffle(concat(sampleSize(this.all, 3), q)),
       answer: q
     }));

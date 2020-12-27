@@ -1,7 +1,8 @@
 import React, { memo } from 'react';
 import { ComposableMap, Geographies, Geography } from 'react-simple-maps';
+import { ZoomableGroup } from 'react-simple-maps';
 
-const MapChart = ({ selected, geoUrl }) => {
+const MapChart = ({ selected, source }) => {
   return (
     <ComposableMap
       data-tip=""
@@ -10,18 +11,22 @@ const MapChart = ({ selected, geoUrl }) => {
         scale: 100
       }}
     >
-      <Geographies geography={geoUrl}>
-        {({ geographies }) =>
-          geographies.map(geo => (
-            <Geography
-              key={geo.rsmKey}
-              geography={geo}
-              fill={geo.properties.NAME === selected ? '#F53' : '#9998A3'}
-              stroke="#EAEAEC"
-            />
-          ))
-        }
-      </Geographies>
+      <ZoomableGroup zoom={source.zoom} center={source.center}>
+        <Geographies geography={source.url}>
+          {({ geographies }) =>
+            geographies.map(geo => (
+              <Geography
+                key={geo.rsmKey}
+                geography={geo}
+                fill={
+                  geo.properties[source.prop] === selected ? '#F53' : '#9998A3'
+                }
+                stroke="#EAEAEC"
+              />
+            ))
+          }
+        </Geographies>
+      </ZoomableGroup>
     </ComposableMap>
   );
 };
