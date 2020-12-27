@@ -31,3 +31,16 @@
     transform: rotate(360deg);
   }
 }
+
+.questions {
+  position: absolute;
+  padding: 30px;
+}
+
+.questions div {
+  display: block;
+  padding: 30px;
+  text-align: right;
+  bottom: 0;
+  right: 0;
+}

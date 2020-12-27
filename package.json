@@ -12,10 +12,14 @@
   },
   "homepage": "https://react-fire-tv-web-app-example.netlify.com/",
   "dependencies": {
+    "@noriginmedia/react-spatial-navigation": "^2.12.5",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-keyboard-input-hook": "^1.0.0",
-    "react-scripts": "3.0.1"
+    "react-scripts": "3.0.1",
+    "react-simple-maps": "^2.3.0",
+    "react-tooltip": "^4.2.11",
+    "world-atlas": "^2.0.2"
   },
   "scripts": {
     "start": "react-scripts start",
