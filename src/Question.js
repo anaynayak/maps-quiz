@@ -25,9 +25,7 @@ class Question extends React.PureComponent {
   }
 
   validate({ val }, details) {
-    console.log(
-      `Clicked ${JSON.stringify(val)}, ${this.props.question.answer}`
-    );
+    this.props.onComplete(val, this.props.question.answer === val);
   }
 
   render() {
