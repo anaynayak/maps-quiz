@@ -25,10 +25,11 @@ class Question extends React.PureComponent {
   }
 
   validate({ val }, details) {
-    this.props.onComplete(val, this.props.question.answer === val);
+    this.props.onComplete(val, this.props.question.answer);
   }
 
   render() {
+    this.props.setFocus();
     const { name, options } = this.props.question;
     const validate = this.validate.bind(this);
     return (

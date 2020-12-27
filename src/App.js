@@ -9,18 +9,33 @@ import {
   NotificationManager
 } from 'react-notifications';
 import Questions from './Questions';
-
+import flatMap from 'lodash/flatMap';
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { questions: new Questions().countries() };
+    this.geoUrl = Questions.Countries;
+    this.state = { questions: [] };
   }
 
-  onComplete(val, success) {
-    if (success) {
+  componentDidMount() {
+    return fetch(this.geoUrl)
+      .then(r => r.json())
+      .then(d =>
+        flatMap(d.objects, a => a.geometries.map(g => g.properties.NAME))
+      )
+      .then(names => {
+        this.setState({ questions: new Questions(names).allq() });
+      });
+  }
+  onComplete(val, actual) {
+    if (val === actual) {
       NotificationManager.success(`${val} is the correct answer!`, null, 500);
     } else {
-      NotificationManager.warning(`${val} is wrong answer!`, null, 500);
+      NotificationManager.warning(
+        `${val} is incorrect. ${actual} is the right answer.`,
+        null,
+        500
+      );
     }
     this.setState({ questions: this.state.questions.slice(1) });
   }
@@ -40,7 +55,7 @@ class App extends React.PureComponent {
           />
         )}
         {!question && <h3>Congratulations! You have completed the quiz</h3>}
-        <MapChart selected={question && question.answer} />
+        <MapChart selected={question && question.answer} geoUrl={this.geoUrl} />
         <NotificationContainer />
       </div>
     );
