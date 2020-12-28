@@ -2,26 +2,8 @@ import withFocusable from '@noriginmedia/react-spatial-navigation/dist/withFocus
 import React from 'react';
 import AnswerFocusable from './Answer';
 class Question extends React.PureComponent {
-  constructor(props) {
-    super(props);
-
-    this.onPressKey = this.onPressKey.bind(this);
-  }
-
   componentDidMount() {
     this.props.setFocus();
-
-    window.addEventListener('keydown', this.onPressKey);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.onPressKey);
-  }
-
-  onPressKey(event) {
-    if (event.keyCode === 8) {
-      this.props.setFocus();
-    }
   }
 
   validate({ val }, details) {
