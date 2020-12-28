@@ -14,7 +14,7 @@ import Sources from './Sources';
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { questions: [], source: Sources.WORLD };
+    this.state = { questions: [], source: Sources.INDIA };
   }
 
   componentDidMount() {

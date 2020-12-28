@@ -22,6 +22,7 @@ const MapChart = ({ selected, source }) => {
                   geo.properties[source.prop] === selected ? '#F53' : '#9998A3'
                 }
                 stroke="#EAEAEC"
+                strokeWidth=".1"
               />
             ))
           }

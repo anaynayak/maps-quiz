@@ -9,11 +9,11 @@ const Sources = Object.freeze({
   },
   INDIA: {
     url:
-      'https://gist.githubusercontent.com/anilnairxyz/1ca20f47982712cf6d4128064e3a6feb/raw/3e0c829745ebf567cb8e15399168ba2777ba1864/ne_10m_admin_1_India_Official.json',
+      'https://gist.githubusercontent.com/anaynayak/3e66e1f7b80e2f153719f8c0bbb38bf9/raw/d552cd21eec91d822d9f503c33743825f1c69f80/ne_10m_admin_1_India_Official.json',
     prop: 'name',
     question: 'Identify states of India',
     zoom: 5,
-    center: [73, 20]
+    center: [75, 12]
   }
 });
 
