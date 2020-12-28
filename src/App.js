@@ -18,6 +18,8 @@ class App extends React.PureComponent {
   }
 
   componentDidMount() {
+    initNavigation();
+
     return fetch(this.state.source.url)
       .then(r => r.json())
       .then(d =>
@@ -45,7 +47,6 @@ class App extends React.PureComponent {
   }
 
   render() {
-    initNavigation();
     const question = this.state.questions[0];
     const onComplete = this.onComplete.bind(this);
     return (
