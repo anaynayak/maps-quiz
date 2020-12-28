@@ -19,7 +19,7 @@ class Question extends React.PureComponent {
         <h3>{name}</h3>
         {options.map((m, i) => (
           <AnswerFocusable
-            key={m}
+            key={`${name}-{m}`}
             focusKey={`MENU-${m}`}
             val={m}
             onEnterPress={validate}
