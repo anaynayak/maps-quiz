@@ -4,7 +4,7 @@ import shuffle from 'lodash/shuffle';
 
 class Questions {
   constructor(all, question) {
-    this.all = all;
+    this.all = shuffle(all);
     this.question = question;
   }
 
