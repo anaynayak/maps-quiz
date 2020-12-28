@@ -44,3 +44,9 @@
 .focussed {
   border: #61dafb 1px solid;
 }
+
+.progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}

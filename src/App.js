@@ -11,10 +11,15 @@ import {
 import Questions from './Questions';
 import flatMap from 'lodash/flatMap';
 import Sources from './Sources';
+import QuizProgress from './QuizProgress';
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
-    this.state = { questions: [], source: Sources.INDIA };
+    this.state = {
+      questions: [],
+      source: Sources.INDIA,
+      stats: { answered: 0, completed: 0 }
+    };
   }
 
   componentDidMount() {
@@ -34,7 +39,9 @@ class App extends React.PureComponent {
       });
   }
   onComplete(val, actual) {
+    let { answered, completed } = this.state.stats;
     if (val === actual) {
+      answered += 1;
       NotificationManager.success(`${val} is the correct answer!`, null, 1500);
     } else {
       NotificationManager.warning(
@@ -43,7 +50,11 @@ class App extends React.PureComponent {
         1500
       );
     }
-    this.setState({ questions: this.state.questions.slice(1) });
+    completed += 1;
+    this.setState({
+      questions: this.state.questions.slice(1),
+      stats: { answered: answered, completed: completed }
+    });
   }
 
   render() {
@@ -64,6 +75,10 @@ class App extends React.PureComponent {
           source={this.state.source}
         />
         <NotificationContainer />
+        <QuizProgress
+          answered={this.state.stats.answered}
+          completed={this.state.stats.completed}
+        />
       </div>
     );
   }
