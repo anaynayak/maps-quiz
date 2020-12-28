@@ -78,6 +78,7 @@ class App extends React.PureComponent {
         <QuizProgress
           answered={this.state.stats.answered}
           completed={this.state.stats.completed}
+          done={this.state.questions.length === 0}
         />
       </div>
     );
