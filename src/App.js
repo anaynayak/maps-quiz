@@ -33,12 +33,12 @@ class App extends React.PureComponent {
   }
   onComplete(val, actual) {
     if (val === actual) {
-      NotificationManager.success(`${val} is the correct answer!`, null, 500);
+      NotificationManager.success(`${val} is the correct answer!`, null, 1500);
     } else {
       NotificationManager.warning(
         `${val} is incorrect. ${actual} is the right answer.`,
         null,
-        500
+        1500
       );
     }
     this.setState({ questions: this.state.questions.slice(1) });
