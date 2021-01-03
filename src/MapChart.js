@@ -6,8 +6,16 @@ import {
   Marker
 } from 'react-simple-maps';
 import { ZoomableGroup } from 'react-simple-maps';
-import { geoArea, geoCentroid } from 'd3-geo';
+import { geoArea, geoCentroid, geoLength } from 'd3-geo';
 class MapChart extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      zoom: this.props.source.zoom,
+      center: this.props.source.center,
+      selected: this.props.selected
+    };
+  }
   isSelected(geo) {
     return geo.properties[this.props.source.prop] === this.props.selected;
   }
@@ -15,7 +23,30 @@ class MapChart extends React.PureComponent {
   isSmall(geo) {
     return this.isSelected(geo) && geoArea(geo) < 0.0001;
   }
+  zoomLevel(geo) {
+    const x = geoLength(geo);
+    console.log(x * 25);
+    return 5;
+  }
+  center(geo) {
+    const [x, y] = geoCentroid(geo);
+    return [x, y - 10];
+  }
+  parseGeographies(geos) {
+    setTimeout(() => {
+      const geo = geos.find(g => this.isSelected(g));
+      const viewport = {
+        zoom: this.zoomLevel(geo),
+        center: this.center(geo),
+        selected: this.props.selected
+      };
+      if (this.props.selected !== this.state.selected) this.setState(viewport);
+    });
+    geos.map(g => this.zoomLevel(g));
+    return geos;
+  }
   render() {
+    const parseGeographies = this.parseGeographies.bind(this);
     return (
       <ComposableMap
         data-tip=""
@@ -24,11 +55,11 @@ class MapChart extends React.PureComponent {
           scale: 100
         }}
       >
-        <ZoomableGroup
-          zoom={this.props.source.zoom}
-          center={this.props.source.center}
-        >
-          <Geographies geography={this.props.source.url}>
+        <ZoomableGroup zoom={this.state.zoom} center={this.state.center}>
+          <Geographies
+            geography={this.props.source.url}
+            parseGeographies={parseGeographies}
+          >
             {({ geographies }) =>
               geographies.map(geo => (
                 <Geography

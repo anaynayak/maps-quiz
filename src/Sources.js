@@ -20,8 +20,7 @@ const Sources = Object.freeze({
     return {
       url: `https://raw.githubusercontent.com/anaynayak/gadm-topo/master/topojson${window.location.pathname}/1.json`,
       prop: 'NAME_1',
-      question: `Identify states of ${window.location.pathname.slice(1)}`,
-      zoom: 5
+      question: `Identify states of ${window.location.pathname.slice(1)}`
     };
   }
 });
