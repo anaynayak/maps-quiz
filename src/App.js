@@ -30,9 +30,14 @@ class App extends React.PureComponent {
         )
       )
       .then(names => {
+        const questions = new Questions(
+          names,
+          this.state.source.question
+        ).allq();
         this.setState({
-          questions: new Questions(names, this.state.source.question).allq()
+          questions: questions
         });
+        console.table(questions);
       });
   }
   onComplete(val, actual) {
