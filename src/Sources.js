@@ -14,6 +14,15 @@ const Sources = Object.freeze({
     question: 'Identify states of India',
     zoom: 5,
     center: [75, 12]
+  },
+  default: () => {
+    if (window.location.pathname === '/') return Sources.INDIA;
+    return {
+      url: `https://raw.githubusercontent.com/anaynayak/gadm-topo/master/topojson${window.location.pathname}/1.json`,
+      prop: 'NAME_1',
+      question: `Identify states of ${window.location.pathname.slice(1)}`,
+      zoom: 5
+    };
   }
 });
 

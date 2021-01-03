@@ -16,7 +16,7 @@ class App extends React.PureComponent {
     super(props);
     this.state = {
       questions: [],
-      source: Sources.INDIA,
+      source: Sources.default(),
       stats: { answered: 0, completed: 0 }
     };
   }
