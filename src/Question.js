@@ -1,37 +1,42 @@
-import withFocusable from '@noriginmedia/react-spatial-navigation/dist/withFocusable';
 import React from 'react';
-import AnswerFocusable from './Answer';
-class Question extends React.PureComponent {
-  componentDidMount() {
-    this.props.setFocus();
-  }
+import Answer from './Answer';
+import SpatialNavigation, { Focusable } from 'react-js-spatial-navigation';
 
-  validate({ val }, details) {
+class Question extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      focus: ''
+    };
+  }
+  validate(val) {
     this.props.onComplete(val, this.props.question.answer);
   }
 
+  onFocus(val) {
+    this.setState({ focus: val });
+  }
+
   render() {
-    this.props.setFocus();
     const { name, options } = this.props.question;
     const validate = this.validate.bind(this);
+    const onFocus = this.onFocus.bind(this);
     return (
-      <div className="questions">
-        <h3>{name}</h3>
-        {options.map((m, i) => (
-          <AnswerFocusable
-            key={`${name}-${m}`}
-            focusKey={`MENU-${m}`}
-            val={m}
-            onEnterPress={validate}
-          />
-        ))}
-      </div>
+      <SpatialNavigation>
+        <div className="questions">
+          <h3>{name}</h3>
+          {options.map((m, i) => (
+            <Focusable
+              key={`${name}-${m}`}
+              onFocus={() => onFocus(m)}
+              onClickEnter={() => validate(m)}
+            >
+              <Answer val={m} focused={this.state.focus === m} />
+            </Focusable>
+          ))}
+        </div>
+      </SpatialNavigation>
     );
   }
 }
-
-const QuestionFocusable = withFocusable({
-  trackChildren: true
-})(Question);
-
-export default QuestionFocusable;
+export default Question;

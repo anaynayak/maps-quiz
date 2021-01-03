@@ -3,20 +3,16 @@
   padding: 30px;
 }
 
-.questions div {
-  display: block;
-  padding: 30px;
-  text-align: right;
-  bottom: 0;
-  right: 0;
-}
-
-.focussed {
-  border: #61dafb 1px solid;
+.focusable {
+  display: inline-block;
 }
 
 .progress {
   position: absolute;
   bottom: 0;
   left: 0;
+}
+
+div {
+  outline: none;
 }

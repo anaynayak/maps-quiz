@@ -1,5 +1,4 @@
 import React from 'react';
-import { withFocusable } from '@noriginmedia/react-spatial-navigation';
 
 class Answer extends React.PureComponent {
   render() {
@@ -11,6 +10,4 @@ class Answer extends React.PureComponent {
   }
 }
 
-const AnswerFocusable = withFocusable()(Answer);
-
-export default AnswerFocusable;
+export default Answer;

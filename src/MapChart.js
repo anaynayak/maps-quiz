@@ -13,13 +13,6 @@ class MapChart extends React.PureComponent {
   }
 
   isSmall(geo) {
-    console.log(geo.properties.name, geoArea(geo), geoArea(geo) < 0.0001);
-    console.log(
-      this.isSelected(geo),
-      this.props.source.prop,
-      geoArea(geo),
-      geoCentroid(this.props.source.center)
-    );
     return this.isSelected(geo) && geoArea(geo) < 0.0001;
   }
   render() {

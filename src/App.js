@@ -2,8 +2,7 @@ import React from 'react';
 import './App.css';
 import 'react-notifications/lib/notifications.css';
 import MapChart from './MapChart';
-import { initNavigation } from '@noriginmedia/react-spatial-navigation';
-import QuestionFocusable from './Question';
+import Question from './Question';
 import {
   NotificationContainer,
   NotificationManager
@@ -23,8 +22,6 @@ class App extends React.PureComponent {
   }
 
   componentDidMount() {
-    initNavigation();
-
     return fetch(this.state.source.url)
       .then(r => r.json())
       .then(d =>
@@ -62,13 +59,7 @@ class App extends React.PureComponent {
     const onComplete = this.onComplete.bind(this);
     return (
       <div className="App">
-        {question && (
-          <QuestionFocusable
-            focusable={false}
-            question={question}
-            onComplete={onComplete}
-          />
-        )}
+        {question && <Question question={question} onComplete={onComplete} />}
         {!question && <h3>Congratulations! You have completed the quiz</h3>}
         <MapChart
           selected={question && question.answer}
