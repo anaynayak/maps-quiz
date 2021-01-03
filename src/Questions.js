@@ -1,7 +1,7 @@
 import sampleSize from 'lodash/sampleSize';
 import concat from 'lodash/concat';
 import shuffle from 'lodash/shuffle';
-
+import difference from 'lodash/difference';
 class Questions {
   constructor(all, question) {
     this.all = shuffle(all);
@@ -11,7 +11,7 @@ class Questions {
   allq() {
     return this.all.map(q => ({
       name: this.question,
-      options: shuffle(concat(sampleSize(this.all, 3), q)),
+      options: shuffle(concat(sampleSize(difference(this.all, [q]), 3), q)),
       answer: q
     }));
   }
