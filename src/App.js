@@ -15,7 +15,7 @@ class App extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      questions: [],
+      questions: [{ loading: true }],
       source: Sources.default(),
       stats: { answered: 0, completed: 0 }
     };
@@ -64,7 +64,9 @@ class App extends React.PureComponent {
     const onComplete = this.onComplete.bind(this);
     return (
       <div className="App">
-        {question && <Question question={question} onComplete={onComplete} />}
+        {question && !question.loading && (
+          <Question question={question} onComplete={onComplete} />
+        )}
         {!question && <h3>Congratulations! You have completed the quiz</h3>}
         <MapChart
           selected={question && question.answer}
