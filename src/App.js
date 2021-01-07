@@ -1,16 +1,25 @@
 import React from 'react';
 import './App.css';
-import 'react-notifications/lib/notifications.css';
+import 'react-notifications-component/dist/theme.css';
 import MapChart from './MapChart';
 import Question from './Question';
-import {
-  NotificationContainer,
-  NotificationManager
-} from 'react-notifications';
+import ReactNotification, { store } from 'react-notifications-component';
 import Questions from './Questions';
 import flatMap from 'lodash/flatMap';
 import Sources from './Sources';
 import QuizProgress from './QuizProgress';
+
+const notification = {
+  type: 'success',
+  insert: 'top',
+  container: 'top-full',
+  message: 'foo',
+  animationIn: ['animate__animated', 'animate__fadeIn'],
+  animationOut: ['animate__animated', 'animate__fadeOut'],
+  dismiss: {
+    duration: 1500
+  }
+};
 class App extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -44,13 +53,14 @@ class App extends React.PureComponent {
     let { answered, completed } = this.state.stats;
     if (val === actual) {
       answered += 1;
-      NotificationManager.success(`${val} is the correct answer!`, null, 1500);
+      this.notify({
+        message: `${val} is the correct answer!`
+      });
     } else {
-      NotificationManager.warning(
-        `${val} is incorrect. ${actual} is the right answer.`,
-        null,
-        1500
-      );
+      this.notify({
+        type: 'warning',
+        message: `${val} is incorrect. ${actual} is the right answer.`
+      });
     }
     completed += 1;
     this.setState({
@@ -59,11 +69,18 @@ class App extends React.PureComponent {
     });
   }
 
+  notify(args) {
+    store.addNotification({
+      ...notification,
+      ...args
+    });
+  }
   render() {
     const question = this.state.questions[0];
     const onComplete = this.onComplete.bind(this);
     return (
       <div className="App">
+        <ReactNotification />
         {question && !question.loading && (
           <Question question={question} onComplete={onComplete} />
         )}
@@ -72,7 +89,6 @@ class App extends React.PureComponent {
           selected={question && question.answer}
           source={this.state.source}
         />
-        <NotificationContainer />
         <QuizProgress
           answered={this.state.stats.answered}
           completed={this.state.stats.completed}

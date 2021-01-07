@@ -3,10 +3,6 @@
   padding: 30px;
 }
 
-.focusable {
-  display: inline-block;
-}
-
 .progress {
   position: absolute;
   bottom: 0;

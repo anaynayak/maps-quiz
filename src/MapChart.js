@@ -83,7 +83,7 @@ class MapChart extends React.PureComponent {
                     >
                       <g
                         fill="none"
-                        stroke="yellow"
+                        stroke="#F53"
                         strokeWidth=".3"
                         strokeLinecap="round"
                         strokeLinejoin="round"

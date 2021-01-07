@@ -17,6 +17,7 @@
     "react-dom": "^16.8.6",
     "react-js-spatial-navigation": "^0.0.5",
     "react-notifications": "^1.7.2",
+    "react-notifications-component": "^3.0.3",
     "react-scripts": "4.0.1",
     "react-simple-maps": "^2.3.0",
     "world-atlas": "^2.0.2"
