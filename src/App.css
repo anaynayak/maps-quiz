@@ -1,12 +1,11 @@
 .questions {
   position: absolute;
-  padding: 30px;
 }
 
 .progress {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 15pt;
 }
 
 div {

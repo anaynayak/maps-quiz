@@ -13,6 +13,7 @@
   "homepage": "https://react-fire-tv-web-app-example.netlify.com/",
   "dependencies": {
     "milligram": "^1.4.1",
+    "rc-progress": "^3.1.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-js-spatial-navigation": "^0.0.5",

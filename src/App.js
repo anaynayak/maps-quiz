@@ -26,6 +26,7 @@ class App extends React.PureComponent {
     this.state = {
       questions: [{ loading: true }],
       source: Sources.default(),
+      total: 1,
       stats: { answered: 0, completed: 0 }
     };
   }
@@ -44,7 +45,8 @@ class App extends React.PureComponent {
           this.state.source.question
         ).allq();
         this.setState({
-          questions: questions
+          questions: questions,
+          total: questions.length
         });
         console.table(questions);
       });
@@ -91,7 +93,7 @@ class App extends React.PureComponent {
         />
         <QuizProgress
           answered={this.state.stats.answered}
-          completed={this.state.stats.completed}
+          completed={this.state.total}
           done={this.state.questions.length === 0}
         />
       </div>
