@@ -31,7 +31,11 @@ class Question extends React.PureComponent {
               onFocus={() => onFocus(m)}
               onClickEnter={() => validate(m)}
             >
-              <Answer val={m} focused={this.state.focus === m} />
+              <Answer
+                onClick={() => validate(m)}
+                val={m}
+                focused={this.state.focus === m}
+              />
             </Focusable>
           ))}
         </div>
