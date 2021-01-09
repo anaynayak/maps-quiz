@@ -5,7 +5,6 @@ import MapChart from './MapChart';
 import Question from './Question';
 import ReactNotification, { store } from 'react-notifications-component';
 import Questions from './Questions';
-import flatMap from 'lodash/flatMap';
 import Sources from './Sources';
 import QuizProgress from './QuizProgress';
 
@@ -25,6 +24,7 @@ class App extends React.PureComponent {
     super(props);
     this.state = {
       questions: [{ loading: true }],
+      topo: [],
       source: Sources.default(),
       total: 1,
       stats: { answered: 0, completed: 0 }
@@ -34,21 +34,17 @@ class App extends React.PureComponent {
   componentDidMount() {
     return fetch(this.state.source.url)
       .then(r => r.json())
-      .then(d =>
-        flatMap(d.objects, a =>
-          a.geometries.map(g => g.properties[this.state.source.prop])
-        )
-      )
-      .then(names => {
-        const questions = new Questions(
-          names,
-          this.state.source.question
+      .then(d => {
+        const questions = Questions.from(
+          d,
+          this.state.source.question,
+          this.state.source.prop
         ).allq();
         this.setState({
+          topo: d,
           questions: questions,
           total: questions.length
         });
-        console.table(questions);
       });
   }
   onComplete(val, actual) {
@@ -66,7 +62,6 @@ class App extends React.PureComponent {
     }
     completed += 1;
     this.setState({
-      questions: this.state.questions.slice(1),
       stats: { answered: answered, completed: completed }
     });
   }
@@ -78,7 +73,7 @@ class App extends React.PureComponent {
     });
   }
   render() {
-    const question = this.state.questions[0];
+    const question = this.state.questions[this.state.stats.completed];
     const onComplete = this.onComplete.bind(this);
     return (
       <div className="App">
@@ -89,6 +84,7 @@ class App extends React.PureComponent {
         {!question && <h3>Congratulations! You have completed the quiz</h3>}
         <MapChart
           selected={question && question.answer}
+          topojson={this.state.topo}
           source={this.state.source}
         />
         <QuizProgress

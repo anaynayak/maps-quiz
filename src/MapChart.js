@@ -25,7 +25,6 @@ class MapChart extends React.PureComponent {
   }
   zoomLevel(geo) {
     const x = geoLength(geo);
-    console.log(x * 25);
     return 5;
   }
   center(geo) {
@@ -57,7 +56,7 @@ class MapChart extends React.PureComponent {
       >
         <ZoomableGroup zoom={this.state.zoom} center={this.state.center}>
           <Geographies
-            geography={this.props.source.url}
+            geography={this.props.topojson}
             parseGeographies={parseGeographies}
           >
             {({ geographies }) =>
@@ -72,7 +71,7 @@ class MapChart extends React.PureComponent {
               ))
             }
           </Geographies>
-          <Geographies geography={this.props.source.url}>
+          <Geographies geography={this.props.topojson}>
             {({ geographies }) =>
               geographies.map(
                 geo =>
