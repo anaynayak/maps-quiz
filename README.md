@@ -2,6 +2,9 @@
 
 A 10 foot user experience for identifying states of a country. 
 
+![Screenshot](https://user-images.githubusercontent.com/416211/104117170-3ad7c480-5345-11eb-83bf-85a38ef7397b.png)
+
+
 ### Installation
 
 ```
